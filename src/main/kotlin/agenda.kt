@@ -32,6 +32,7 @@ fun main(): Any {
 
     while (entrada != "adios") {
 
+        // Comprobar numero de telefono
         if (entrada[0] == '+' || entrada[0] in numeros) {
             val telefono: String = entrada
             if(!agenda1.validarTelefono(telefono)) {
@@ -40,11 +41,12 @@ fun main(): Any {
             else {
                 // Hacer que me saque el nombre del contacto con ese teléfono
                 if(telefono in agenda1.contactos.values) {
-                    return listOf<String>(agenda1.contactos.keys)[listOf<>(agenda1.contactos.values).indexOf(telefono)]
+                    return listOf<MutableSet<"String">>(agenda1.contactos.keys)[listOf<MutableSet<"String">>(agenda1.contactos.values).indexOf(telefono)]
                 }
 
                 else if(telefono !in agenda1.contactos) {
-                    nombreContacto = input("Introduce el nombre del contacto: ")
+                    print("Introduce el nombre del contacto: ")
+                    var nombreContacto = readln()
                     agenda1.contactos[nombreContacto] = telefono
                     return agenda1.contactos
                 }
