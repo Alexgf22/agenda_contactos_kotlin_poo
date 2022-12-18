@@ -1,3 +1,4 @@
+
 class Agenda(
     val contactos: MutableMap<String,String> = mutableMapOf()
 ) {
@@ -32,6 +33,24 @@ class Agenda(
     }
 
 
+    fun listar(): MutableMap<String, String> {
+        print("A continuación se ordenará el diccionario por nombres: ")
+        val clavesOrdenadas = (contactos.keys).sorted()
+        val contactosOrdenados : MutableMap<String,String> =  mutableMapOf()
+        for(key in clavesOrdenadas) {
+            val valor = contactos[key]
+            if (valor != null) {
+                contactosOrdenados[key] = valor
+            }
+        }
+
+        return contactosOrdenados
+
+
+    }
+
+
+
 }
 
 
@@ -45,8 +64,36 @@ fun main() {
 
     while (entrada != "adios") {
 
+        fun esTelefono(): Boolean {
+            return entrada[0] == '+' || entrada[0] in numeros
+        }
+
+        fun filtrar(): MutableMap<String, String> {
+            print("A continuación se filtrará el diccionario por la información dada: ")
+            val dictResultante : MutableMap<String,String> =  mutableMapOf()
+            val separacion = entrada.split(" ")
+            val textoBuscar = separacion[1]
+            for(nombre in agenda1.contactos.keys) {
+                if(textoBuscar in nombre) {
+                    val valor = agenda1.contactos[nombre]
+                    if (valor != null) {
+                        dictResultante[nombre] = valor
+                    }
+                }
+            }
+
+            if((dictResultante).size == 0) {
+                val dict = mutableMapOf<String,String>()
+                return dict
+            }
+            else {
+                return dictResultante
+            }
+
+        }
+
         // Comprobar numero de telefono
-        if (entrada[0] == '+' || entrada[0] in numeros) {
+        if (esTelefono()) {
             val telefono: String = entrada
             if(!agenda1.validarTelefono(telefono)) {
                 error("El telefono no es valido")
@@ -94,6 +141,18 @@ fun main() {
             }
 
         }
+
+
+        else if(entrada == "listado") {
+            print(agenda1.listar())
+        }
+
+
+        else if("filtra" in entrada) {
+            print(filtrar())
+        }
+
+
 
 
     }
