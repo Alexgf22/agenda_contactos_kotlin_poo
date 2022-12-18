@@ -17,14 +17,14 @@ class Agenda(
     }
 
     fun anadirContactoNuevo(telefono: String, nombreContacto: String) : MutableMap<String,String> {
-        var telefonoSinEspacios = telefono.replace(" ","")
+        val telefonoSinEspacios = telefono.replace(" ","")
         contactos[nombreContacto] = telefonoSinEspacios
         return contactos
     }
 
 
     fun validarContacto(nombreContacto: String): Boolean {
-        var contactoSinEspacios = nombreContacto.replace(" ","")
+        val contactoSinEspacios = nombreContacto.replace(" ","")
         //val r2 = Regex("^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü0123456789!#$%&-/@{}ªº|'+?():;,.~_^<>`\s]?)+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]?)+$")
         val r2 = Regex("^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü0123456789!#$%&-/@{}ªº|'+?():;,.~_^<>`]?)+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]?)+$")
 
@@ -37,7 +37,7 @@ class Agenda(
 
 
     fun listar(): MutableMap<String, String> {
-        print("A continuación se ordenará el diccionario por nombres: ")
+        println("A continuacion se ordenara el diccionario por nombres: ")
         val clavesOrdenadas = (contactos.keys).sorted()
         val contactosOrdenados : MutableMap<String,String> =  mutableMapOf()
         for(key in clavesOrdenadas) {
@@ -68,11 +68,11 @@ fun main() {
     while (entrada != "adios") {
 
         fun esTelefono(): Boolean {
-            return entrada[0] == '+' || entrada[0] in numeros
+            return (entrada[0] == '+') || ((entrada[0] in numeros) && (entrada[1] !in 'a'..'z'))
         }
 
         fun filtrar(): MutableMap<String, String> {
-            print("A continuación se filtrará el diccionario por la información dada: ")
+            print("A continuacion se filtrara el diccionario por la informacion dada: ")
             val dictResultante : MutableMap<String,String> =  mutableMapOf()
             val separacion = entrada.split(" ")
             val textoBuscar = separacion[1]
@@ -101,7 +101,7 @@ fun main() {
         if (esTelefono()) {
             val telefono: String = entrada
             if(!agenda1.validarTelefono(telefono)) {
-                error("El telefono no es valido")
+                println("El telefono no es valido")
             }
             else {
                 // Hacer que me saque el nombre del contacto con ese teléfono
@@ -123,8 +123,8 @@ fun main() {
         // Nombre de contacto
         else if(entrada != "listado" && "filtra" !in entrada) {
             val nombreContacto: String = entrada
-            if (!agenda1.validarContacto(nombreContacto)) {
-                error("El nombre del contacto no es valido")
+            if (!agenda1.validarContacto(nombreContacto) || nombreContacto[0] in numeros) {
+                println("El nombre del contacto no es valido")
             } else {
                 // Si el contacto esta en el map saca el telefono
                 if(nombreContacto in agenda1.contactos) {
@@ -132,10 +132,10 @@ fun main() {
                 }
                 // Si el contacto no esta en el map
                 else if(nombreContacto !in agenda1.contactos) {
-                    println("Introduce el número de teléfono: ")
+                    println("Introduce el numero de telefono: ")
                     val numeroTelefono = readln()
                     if (!agenda1.validarTelefono(numeroTelefono)) {
-                        error("El numero de telefono no es valido")
+                        println("El numero de telefono no es valido")
                     } else {  // Si el contacto no esta en el map lo introduce junto al nuevo telefono
                         println(agenda1.anadirContactoNuevo(numeroTelefono,nombreContacto))
                     }
