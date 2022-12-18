@@ -59,7 +59,7 @@ class Agenda(
 fun main() {
     val agenda1 = Agenda(mutableMapOf("alex" to "667275980","jose" to "668876657"))
     val numeros = listOf('0','1','2','3','4','5','6','7','8','9')
-    print("Introduce algo:")
+    print("Introduce algo: ")
     val entrada = readln()
 
     while (entrada != "adios") {
@@ -103,14 +103,14 @@ fun main() {
                 if(telefono in agenda1.contactos.values) {
                     val claves = agenda1.contactos.keys.toMutableList()
                     val valores = agenda1.contactos.values.toMutableList()
-                    print(claves[valores.indexOf(telefono)])
+                    println(claves[valores.indexOf(telefono)])
                 }
 
                 else if(telefono !in agenda1.contactos) {
-                    print("Introduce el nombre del contacto: ")
+                    println("Introduce el nombre del contacto: ")
                     val nombreContacto = readln()
                     agenda1.contactos[nombreContacto] = telefono
-                    print(agenda1.contactos)
+                    println(agenda1.contactos)
                 }
             }
         }
@@ -124,17 +124,17 @@ fun main() {
             } else {
 
                 if(nombreContacto in agenda1.contactos) {
-                    print(agenda1.contactos[nombreContacto])
+                    println(agenda1.contactos[nombreContacto])
                 }
 
                 else if(nombreContacto !in agenda1.contactos) {
-                    print("Introduce el número de teléfono: ")
+                    println("Introduce el número de teléfono: ")
                     val telefonoNum = readln()
                     if (!agenda1.validarTelefono(telefonoNum)) {
                         error("El numero de telefono no es valido")
                     } else {
                         agenda1.contactos[nombreContacto] = telefonoNum
-                        print(agenda1.contactos)
+                        println(agenda1.contactos)
                     }
                 }
 
@@ -144,15 +144,17 @@ fun main() {
 
 
         else if(entrada == "listado") {
-            print(agenda1.listar())
+            println(agenda1.listar())
         }
 
 
         else if("filtra" in entrada) {
-            print(filtrar())
+            println(filtrar())
         }
 
 
+        print("Introduce algo: ")
+        val entrada = readln()
 
 
     }
