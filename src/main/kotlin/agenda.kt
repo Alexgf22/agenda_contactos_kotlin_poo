@@ -1,4 +1,4 @@
-
+// Falta + en prefijo movil controlar en la expresion
 class Agenda(
     val contactos: MutableMap<String,String> = mutableMapOf()
 ) {
@@ -85,17 +85,10 @@ fun main() {
                 }
             }
 
-            /*if((dictResultante).isEmpty()) {
-                return dictResultante
-            }
-            else {
-                return dictResultante
-            }*/
             return dictResultante
 
-
-
         }
+
 
         // Con el numero de telefono sacar nombre de contacto si el telefono esta o introducir en el map
         if (esTelefono()) {
@@ -108,7 +101,7 @@ fun main() {
                 if(telefono in agenda1.contactos.values) {
                     val claves = agenda1.contactos.keys.toMutableList()
                     val valores = agenda1.contactos.values.toMutableList()
-                    println(claves[valores.indexOf(telefono)])
+                    println("El telefono: $telefono pertenece a: ${claves[valores.indexOf(telefono)]}")
                 }
                 // Introducir nuevo telefono junto al nombre del contacto en el map
                 else if(telefono !in agenda1.contactos) {
@@ -128,7 +121,7 @@ fun main() {
             } else {
                 // Si el contacto esta en el map saca el telefono
                 if(nombreContacto in agenda1.contactos) {
-                    println(agenda1.contactos[nombreContacto])
+                    println("El telefono de: $nombreContacto es ${agenda1.contactos[nombreContacto]}")
                 }
                 // Si el contacto no esta en el map
                 else if(nombreContacto !in agenda1.contactos) {
