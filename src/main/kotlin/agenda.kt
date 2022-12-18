@@ -111,7 +111,7 @@ fun main() {
                 else if(telefono !in agenda1.contactos) {
                     println("Introduce el nombre del contacto: ")
                     val nombreContacto = readln()
-                    print(agenda1.anadirContactoNuevo(telefono,nombreContacto))
+                    println(agenda1.anadirContactoNuevo(telefono,nombreContacto))
                 }
             }
         }
@@ -134,7 +134,7 @@ fun main() {
                     if (!agenda1.validarTelefono(numeroTelefono)) {
                         error("El numero de telefono no es valido")
                     } else {  // Si el contacto no esta en el map lo introduce junto al nuevo telefono
-                        print(agenda1.anadirContactoNuevo(numeroTelefono,nombreContacto))
+                        println(agenda1.anadirContactoNuevo(numeroTelefono,nombreContacto))
                     }
                 }
 
