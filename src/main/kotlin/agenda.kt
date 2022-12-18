@@ -24,10 +24,11 @@ class Agenda(
 
 
     fun validarContacto(nombreContacto: String): Boolean {
+        var contactoSinEspacios = nombreContacto.replace(" ","")
         //val r2 = Regex("^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü0123456789!#$%&-/@{}ªº|'+?():;,.~_^<>`\s]?)+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]?)+$")
         val r2 = Regex("^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü]+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü0123456789!#$%&-/@{}ªº|'+?():;,.~_^<>`]?)+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]?)+$")
 
-        val resultado = r2.matches(nombreContacto)
+        val resultado = r2.matches(contactoSinEspacios)
         if(resultado) {
             return true
         }
@@ -84,13 +85,15 @@ fun main() {
                 }
             }
 
-            if((dictResultante).isEmpty()) {
-                val dict = mutableMapOf<String,String>()
-                return dict
+            /*if((dictResultante).isEmpty()) {
+                return dictResultante
             }
             else {
                 return dictResultante
-            }
+            }*/
+            return dictResultante
+
+
 
         }
 
@@ -118,7 +121,7 @@ fun main() {
 
 
         // Nombre de contacto
-        else if(entrada != "listado" && entrada != "filtra") {
+        else if(entrada != "listado" && "filtra" !in entrada) {
             val nombreContacto: String = entrada
             if (!agenda1.validarContacto(nombreContacto)) {
                 error("El nombre del contacto no es valido")
