@@ -28,9 +28,10 @@ class Agenda(
 
 
     fun validarTelefono(telefono: String): Boolean {
-        //val r1 = Regex("(\+[0-9]{2})?\s?[0-9]{9}+")
         val telefonoSinEspacios = telefono.replace(" ","")
-        val r1 = Regex("[0-9]+")
+        //val r1 = Regex("[0-9]+")
+        // Validar expresion del telefono
+        val r1 = Regex("(\\+[\\d]{1,3})?\\s?[\\d]{9}+")
 
         val resultado = r1.matches(telefonoSinEspacios)
         if(resultado) {
