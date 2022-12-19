@@ -3,6 +3,29 @@ class Agenda(
     val contactos: MutableMap<String,String> = mutableMapOf()
 ) {
 
+    fun filtrar(entrada:String): MutableMap<String, String> {
+        print("A continuacion se filtrara el diccionario por la informacion dada: ")
+        val dictResultante : MutableMap<String,String> =  mutableMapOf()
+        val separacion = entrada.split(" ")
+        val textoBuscar = separacion[1]
+        for(nombre in contactos.keys) {
+            if(textoBuscar in nombre) {
+                val valor = contactos[nombre]
+                if (valor != null) {
+                    dictResultante[nombre] = valor
+                }
+            }
+        }
+
+        return dictResultante
+
+    }
+
+    fun esTelefono(entrada: String): Boolean {
+        val numeros = listOf('0','1','2','3','4','5','6','7','8','9')
+        return (entrada[0] == '+') || ((entrada[0] in numeros) && (entrada[1] !in 'a'..'z'))
+    }
+
 
     fun validarTelefono(telefono: String): Boolean {
         //val r1 = Regex("(\+[0-9]{2})?\s?[0-9]{9}+")
@@ -67,31 +90,9 @@ fun main() {
 
     while (entrada != "adios") {
 
-        fun esTelefono(): Boolean {
-            return (entrada[0] == '+') || ((entrada[0] in numeros) && (entrada[1] !in 'a'..'z'))
-        }
-
-        fun filtrar(): MutableMap<String, String> {
-            print("A continuacion se filtrara el diccionario por la informacion dada: ")
-            val dictResultante : MutableMap<String,String> =  mutableMapOf()
-            val separacion = entrada.split(" ")
-            val textoBuscar = separacion[1]
-            for(nombre in agenda1.contactos.keys) {
-                if(textoBuscar in nombre) {
-                    val valor = agenda1.contactos[nombre]
-                    if (valor != null) {
-                        dictResultante[nombre] = valor
-                    }
-                }
-            }
-
-            return dictResultante
-
-        }
-
 
         // Con el numero de telefono sacar nombre de contacto si el telefono esta o introducir en el map
-        if (esTelefono()) {
+        if (agenda1.esTelefono(entrada)) {
             val telefono: String = entrada
             if(!agenda1.validarTelefono(telefono)) {
                 println("El telefono no es valido")
@@ -145,7 +146,7 @@ fun main() {
 
 
         else if("filtra" in entrada) {
-            println(filtrar())
+            println(agenda1.filtrar(entrada))
         }
 
 
