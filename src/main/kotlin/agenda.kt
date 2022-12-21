@@ -37,6 +37,16 @@ class Agenda(
             }
         }
 
+        val claves = contactos.keys.toMutableList()
+        val valores = contactos.values.toMutableList()
+
+        for(telefono in contactos.values) {
+            if(textoBuscar in telefono) {
+                val clave = claves[valores.indexOf(telefono)]
+                dictResultante[clave] = telefono
+            }
+        }
+
         return dictResultante
 
     }
