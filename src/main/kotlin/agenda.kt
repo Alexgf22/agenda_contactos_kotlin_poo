@@ -13,7 +13,15 @@ class Agenda(
 ) {
 
     /**
-     * El metodo filtrar lo que hace es
+     * El metodo filtrar lo que hace es crear un mapa mutable, despues recorre en un bucle las claves del
+     * mapa de contactos y mira si el texto que se le pasa como parametro se encuentra en alguna de las
+     * claves y por ultimo introduce en el mapa creado anteriormente la clave que coincida y como valor
+     * el que corresponda a esa clave.
+     *
+     *
+     * @param entrada de tipo String que introduce el usuario y de ahi se saca el texto a buscar en el mapa.
+     *
+     * @return MutableMap con las claves y valores que coinciden con el texto que se pasa como parametro.
      */
     fun filtrar(entrada:String): MutableMap<String, String> {
         print("A continuacion se filtrara el diccionario por la informacion dada: ")
@@ -33,12 +41,32 @@ class Agenda(
 
     }
 
+
+    /**
+     * El metodo esTelefono se crea una variable inmutable 'numeros' para comprobar si el parametro de entrada
+     * el primer caracter se encuentra en la lista y el siguiente caracter es tambien un numero o si
+     * el primer caracter es un signo '+' para indicar que es un prefijo de telefono.
+     *
+     * @param entrada de tipo String que indica el usuario por pantalla.
+     *
+     * @return Boolean devuelve verdadero o falso segun las condiciones anteriores.
+     */
     fun esTelefono(entrada: String): Boolean {
         val numeros = listOf('0','1','2','3','4','5','6','7','8','9')
         return (entrada[0] == '+') || ((entrada[0] in numeros) && (entrada[1] !in 'a'..'z'))
     }
 
 
+    /**
+     * El metodo validarTelefono se le pasa como parametro un telefono. Crea una variable nueva para eliminar
+     * los espacios en blanco del telefono. Despues se crea la expresion regular para validar que el telefono
+     * tenga o no prefijo con minimo 1 y maximo 3 digitos de prefijo y despues 9 digitos mas. Despues crea
+     * otra variable donde guarda el resultado de si es valido o no.
+     *
+     * @param telefono de tipo String para comprobar si es valido o no.
+     *
+     * @return Boolean resultado devuelve true si es valido, en caso contrario false.
+     */
     fun validarTelefono(telefono: String): Boolean {
         val telefonoSinEspacios = telefono.replace(" ","")
         //val r1 = Regex("[0-9]+")
@@ -52,6 +80,17 @@ class Agenda(
         return resultado
     }
 
+
+    /**
+     * Metodo anadirContactoNuevo. Se crea una variable para quitarle los espacios en blanco al telefono.
+     * Despues se introduce en el mapa de contactos como clave el nombre del contacto y como valor
+     * el telefono que ambos se le pasan como parametros.
+     *
+     * @param telefono de tipo String. Telefono del contacto nuevo.
+     * @param nombreContacto de tipo String. Nombre del contacto nuevo.
+     *
+     * @return MutableMap devuelve el mapa de contactos una vez introducido el nuevo contacto.
+     */
     fun anadirContactoNuevo(telefono: String, nombreContacto: String) : MutableMap<String,String> {
         val telefonoSinEspacios = telefono.replace(" ","")
         contactos[nombreContacto] = telefonoSinEspacios
@@ -59,6 +98,15 @@ class Agenda(
     }
 
 
+    /**
+     * Metodo de validarContacto. Se crea una variable para quitar los espacios al nombre del contacto.
+     * Despues en otra variable se guarda la expresion regular para comprobar que pueda introducir tambien
+     * caracteres imprimibles. En otra variable mas se guarda el resultado de si es valido o no.
+     *
+     * @param nombreContacto de tipo String que se le pasa para validarlo.
+     *
+     * @return Boolean devuelve true si el contacto es valido y en caso contrario false.
+     */
     fun validarContacto(nombreContacto: String): Boolean {
         val contactoSinEspacios = nombreContacto.replace(" ","")
         //val r2 = Regex("^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü0123456789!#$%&-/@{}ªº|'+?():;,.~_^<>`\s]?)+([a-zA-ZÑñÁáÉéÍíÓóÚúÜü]?)+$")
@@ -72,6 +120,13 @@ class Agenda(
     }
 
 
+    /**
+     * Metodo listar. En primer lugar, se crea una variable para meter las claves del mapa ordenadas
+     * de forma alfabetica. Despues otra variable para ir metiendo cada una de las claves ordenadas
+     * con su valor correspondiente.
+     *
+     * @return MutableMap con los contactos ordenados por el nombre alfabeticamente.
+     */
     fun listar(): MutableMap<String, String> {
         println("A continuacion se ordenara el diccionario por nombres: ")
         val clavesOrdenadas = (contactos.keys).sorted()
