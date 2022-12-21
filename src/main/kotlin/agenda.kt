@@ -1,8 +1,20 @@
-// Falta + en prefijo movil controlar en la expresion
+/**
+ * La clase Agenda contiene los metodos: filtrar, esTelefono, validarTelefono, anadirContactoNuevo, validarContacto
+ * y listar.
+ *
+ * @property contactos mapa mutable que contiene los nombres de los contactos juntos a sus telefonos
+ * correspondientes.
+ *
+ * @constructor que contiene los contactos.
+ *
+ */
 class Agenda(
     val contactos: MutableMap<String,String> = mutableMapOf()
 ) {
 
+    /**
+     * El metodo filtrar lo que hace es
+     */
     fun filtrar(entrada:String): MutableMap<String, String> {
         print("A continuacion se filtrara el diccionario por la informacion dada: ")
         val dictResultante : MutableMap<String,String> =  mutableMapOf()
