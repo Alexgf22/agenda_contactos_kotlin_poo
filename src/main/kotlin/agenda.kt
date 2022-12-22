@@ -192,7 +192,7 @@ fun main() {
         }
 
 
-        // Nombre de contacto
+        // Nombre del contacto
         else if(entrada != "listado" && "filtra" !in entrada) {
             val nombreContacto: String = entrada
             if (!agenda1.validarContacto(nombreContacto) || nombreContacto[0] in numeros) {
