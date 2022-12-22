@@ -2,8 +2,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.21"
+    id("org.jetbrains.dokka") version "1.6.10"
     application
 }
+
+/*plugins {
+    id("org.jetbrains.dokka") version "1.6.10"
+}*/
+
 
 group = "me.alejandro"
 version = "1.0-SNAPSHOT"
